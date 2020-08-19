@@ -1,0 +1,15 @@
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\bin\Debug\netcoreapp3.1\appLabirinto.exe
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\bin\Debug\netcoreapp3.1\appLabirinto.deps.json
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\bin\Debug\netcoreapp3.1\appLabirinto.runtimeconfig.json
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\bin\Debug\netcoreapp3.1\appLabirinto.runtimeconfig.dev.json
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\bin\Debug\netcoreapp3.1\appLabirinto.dll
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\bin\Debug\netcoreapp3.1\appLabirinto.pdb
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.csprojAssemblyReference.cache
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.AssemblyInfoInputs.cache
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.AssemblyInfo.cs
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.csproj.CoreCompileInputs.cache
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.dll
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.pdb
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.genruntimeconfig.cache
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.appLabirinto.resources
+D:\Trabalhos\RespositorioVS\appLabirinto\appLabirinto\obj\Debug\netcoreapp3.1\appLabirinto.csproj.GenerateResource.cache
