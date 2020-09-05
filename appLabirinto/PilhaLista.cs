@@ -1,11 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Threading;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace appLabirinto
 {
     class PilhaLista<Dado> : ListaSimples<Dado> where Dado : IComparable<Dado>
     {
+        public override string ToString() 
+        {
+            string ret = "";
+            base.Atual = base.Primeiro;
+            while (base.Atual != null) 
+            {
+                ret += base.Atual.Info.ToString();
+                base.Atual = base.Atual.Prox;
+            }
+            return ret;
+        }
+
+        public PilhaLista() { }
+
         public Dado Desempilhar()
         {
             if (EstaVazia)
@@ -21,10 +38,9 @@ namespace appLabirinto
 
         public void Empilhar(Dado elemento)
         {
-            base.InserirAntesDoInicio
-                (
-                    new NoLista<Dado>(elemento, null)
-                );
+            var no = new NoLista<Dado>(elemento, null);
+
+            base.InserirAntesDoInicio(no);
         }
 
         new public bool EstaVazia
@@ -32,16 +48,15 @@ namespace appLabirinto
             get => base.EstaVazia;
         }
 
-        public Dado OTopo()
+        public NoLista<Dado> OTopo()
         {
             if (EstaVazia)
-                return default(Dado);
+                return null;
 
-            return base.Primeiro.Info;
+            return base.Primeiro;
         }
 
         public int Tamanho { get => base.QuantosNos; }
-
 
         public void Exibir(DataGridView dgv)
         {

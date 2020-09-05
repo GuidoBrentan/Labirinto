@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading;
+using System.Linq;
+using System.Collections;
 
 namespace appLabirinto
 {
@@ -35,6 +37,8 @@ namespace appLabirinto
 
         public void ExibirDataGriedView(DataGridView dgv)
         {
+            dgv.Columns.Clear();
+
             dgv.RowCount = linhas;
             dgv.ColumnCount = colunas;
             for (int coluna = 0; coluna < colunas; coluna++)
@@ -48,7 +52,7 @@ namespace appLabirinto
 
             for (int i = 0; i < linhas; i++)
                 for (int j = 0; j < colunas; j++)
-                    switch(matriz[i, j])
+                    switch (matriz[i, j])
                     {
                         case '#': dgv.Rows[i].Cells[j].Style.BackColor = Color.Yellow; break;
                         case 'I': dgv.Rows[i].Cells[j].Style.BackColor = Color.Red; break;
@@ -56,67 +60,82 @@ namespace appLabirinto
                     }
         }
 
-        public PilhaLista<Movimento> EncontrarCaminhosDataGridView(DataGridView dgv)
+        public void ExibirDataGridView2(DataGridView dgv, LinkedList<ArrayList> l)
         {
-            var movimentos = new PilhaLista<Movimento>();
-            int linhaOrigem = 1, colunaOrigem = 1;
-            bool achou = false, andou;
-            int movimentoDeVolta = 0;
+            dgv.Columns.Clear();
 
-            while(!achou)
+            dgv.RowCount = l.Count;
+            dgv.ColumnCount = 1;
+
+            for (var aux = l.First; aux != null; aux = aux.Next)
+                if (aux.Value.Count > dgv.ColumnCount)
+                    dgv.ColumnCount = aux.Value.Count;
+
+            for (int coluna = 0; coluna < dgv.ColumnCount; coluna++)
             {
-                andou = false;
-                for (int i = 0; i <= 7 && !andou; i++)
+                dgv.Columns[coluna].HeaderText = coluna.ToString();
+                dgv.Columns[coluna].Width = 50;
+            }
+
+            for (int linha = 0; linha < dgv.RowCount; linha++)
+                dgv.Rows[linha].HeaderCell.Value = linha.ToString();
+
+            int i = 0;
+            foreach (var s in l)
+            {
+                int j = 0;
+                foreach (var r in s)
                 {
-                    var mov = new Movimento(i, linhaOrigem, colunaOrigem);
-
-                    if(matriz[mov.LinhaDestino, mov.ColunaDestino] != '#')
-                    {
-                        if (movimentos.ContagemDeNos() == 0 || movimentos.Primeiro.Info.LinhaOrigem != mov.LinhaDestino ||
-                           movimentos.Primeiro.Info.ColunaOrigem != mov.ColunaDestino)
-                        {
-                            movimentos.Empilhar(mov);
-                            linhaOrigem = mov.LinhaDestino;
-                            colunaOrigem = mov.ColunaDestino;
-                            andou = true;
-
-                            ExibirPasso();
-                        }
-                        else
-                            movimentoDeVolta = i;
-                    }
-
-                    if(matriz[mov.LinhaDestino, mov.ColunaDestino] == 'S')
-                    {
-                        achou = true;
-                        movimentos.Empilhar(mov);
-                    }
+                    dgv.Rows[i].Cells[j].Value = ((int[])r)[0] + " : " + ((int[])r)[1];
+                    j++;
                 }
+                i++;
+            }
+        }
 
-                if(!andou)
+        public void ExibirCaminho(ArrayList a, DataGridView dgv)
+        {
+            ExibirDataGriedView(dgv);
+
+            foreach (var i in a)
+            {
+                dgv.Rows[((int[])i)[0]].Cells[((int[])i)[1]].Style.BackColor = Color.Black;
+            }
+        }
+
+        public LinkedList<ArrayList> findpaths(DataGridView dgv)
+        {
+            LinkedList<ArrayList> ret = new LinkedList<ArrayList>();
+            Queue<ArrayList> q = new Queue<ArrayList>();
+
+            ArrayList path = new ArrayList();
+            path.Add(new int[2] { 1, 1 });
+            q.Enqueue(path);
+
+            //matriz[1,1] = 'O';
+
+            while (q.Count != 0)
+            {
+                path = q.Dequeue();
+
+                int[] last = (int[])path[path.Count - 1];
+
+                if (matriz[last[0], last[1]] == 'S')
+                    ret.AddLast(path);
+
+                for (int i = 0; i <= 7; i++)
                 {
-                    var mov = movimentos.Desempilhar();
-
-                    if (!movimentos.EstaVazia)
+                    var mov = new Movimento(i, last[0], last[1]);
+                    if (matriz[mov.LinhaDestino, mov.ColunaDestino] != '#' && matriz[mov.LinhaDestino, mov.ColunaDestino] != 'O')
                     {
-                        movimentos.Empilhar(new Movimento(movimentoDeVolta, linhaOrigem, colunaOrigem));
-                        
-                        linhaOrigem = mov.LinhaOrigem;
-                        colunaOrigem = mov.ColunaOrigem;
-                    }
-                    else
-                    {
-                        break;
+                        matriz[last[0], last[1]] = 'O';
+                        var newPath = new ArrayList(path);
+                        newPath.Add(new int[2] { mov.LinhaDestino, mov.ColunaDestino });
+                        q.Enqueue(newPath);
                     }
                 }
             }
-
-            return movimentos;
-
-            void ExibirPasso()
-            {
-                dgv.Rows[linhaOrigem].Cells[colunaOrigem].Style.BackColor = Color.Black;
-            }
+            return ret;
         }
     }
 }

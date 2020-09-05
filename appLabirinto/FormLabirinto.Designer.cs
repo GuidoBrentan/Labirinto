@@ -115,6 +115,7 @@
             this.dataGridView2.Size = new System.Drawing.Size(724, 235);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.Text = "dataGridView2";
+            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // appLabirinto
             // 

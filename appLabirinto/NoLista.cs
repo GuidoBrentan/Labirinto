@@ -36,6 +36,6 @@ namespace appLabirinto
             Info = novaInfo;
             prox = proximo;
         }
-
     }
 }
+

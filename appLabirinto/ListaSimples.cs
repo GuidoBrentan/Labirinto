@@ -71,10 +71,10 @@ namespace appLabirinto
             NoLista<Dado> aux;
             bool achou = false;
 
-            for(aux = primeiro; aux != null && !achou; aux = aux.Prox)
+            for (aux = primeiro; aux != null && !achou; aux = aux.Prox)
                 if (aux.Equals(outroProcurado))
                     achou = true;
-            
+
             return achou;
         }
 
@@ -207,42 +207,14 @@ namespace appLabirinto
             }
         }
 
-        public NoLista<Dado> Primeiro
-        {
-            get
-            {
-                return primeiro;
-            }
-            set
-            {
-                primeiro = value;
-            }
-        }
 
-        public NoLista<Dado> Atual
-        {
-            get
-            {
-                return atual;
-            }
-        }
-        public NoLista<Dado> Ultimo
-        {
-            get
-            {
-                return ultimo;
-            }
-        }
+        public NoLista<Dado> Primeiro { get => primeiro; set => primeiro = value; }
+        public NoLista<Dado> Ultimo { get => ultimo; set => ultimo = value; }
+        public NoLista<Dado> Atual { get => atual; set => atual = value; }
+        public NoLista<Dado> Anterior { get => anterior; set => anterior = value; }
+        public int QuantosNos { get => quantosNos; set => quantosNos = value; }
+        public bool PrimeiroAcessoDoPercurso { get => primeiroAcessoDoPercurso; set => primeiroAcessoDoPercurso = value; }
 
-        public int QuantosNos
-        {
-            get
-            {
-                return quantosNos;
-            }
-        }
-
-        // exercício 1
         public int ContagemDeNos()
         {
             int quantos = 0;
@@ -255,7 +227,6 @@ namespace appLabirinto
             return quantos;
         }
 
-        // exercicio 3
 
         public void CasamentoCom(ListaSimples<Dado> outra,
                                     ref ListaSimples<Dado> nova)
@@ -310,7 +281,6 @@ namespace appLabirinto
             outra = new ListaSimples<Dado>();
         }
 
-        // exercício 4
         public void Inverter()
         {
             if (quantosNos > 1)
